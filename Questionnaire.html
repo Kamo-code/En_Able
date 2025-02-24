@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+
+    <!-- CSS Section Start -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(57, 144, 182);/* Update the background image if needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;  /* Reduced form width */
+            padding: 60px;
+            text-align: center;
+        }
+
+        h1 {
+            color: black;
+            font-size: 20px;  /* Reduced title size */
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 14px;  /* Smaller label text */
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;  /* Smaller input padding */
+            margin-bottom: 10px;  /* Reduced spacing between inputs */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;  /* Smaller input font */
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;  /* Reduced button padding */
+            background-color: rgb(57, 144, 182);
+            border: none;
+            border-radius: 4px;
+            color: black;
+            font-size: 14px;  /* Smaller button text */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        .question {
+            font-size: 14px;  /* Reduced question text size */
+        }
+    </style>
+    <!-- CSS Section End -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Questionnaire Form</h1>
+        <form id="questionnaireForm" onsubmit="submitForm(event)">
+
+            <label for="name">Name and Surname:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="idNumber">ID Number:</label>
+            <input type="text" id="idNumber" name="idNumber" required  pattern="[0-9]{13}" maxlength="13"><br>
+
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required><br>
+
+            <label for="Gender">Gender:</label>
+            <select id="Gender" name="Gender" required>
+                <option value="Gender">--Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <label for="race">Race</label>
+            <select id="race" name="race">
+                <option value="None">None</option>
+                <option value="African/Black">African/Black</option>
+                <option value="white">white</option>
+                <option value="Coloured">Coloured</option>
+                <option value="indian">Indian</option>
+            </select><br>
+            <label for="disability">Type of Disability:</label>
+            <select id="disability" name="disability" required>
+                <option value="None">None</option>
+                <option value="Visual">Visual</option>
+                <option value="Hearing">Hearing</option>
+                <option value="Mobility">Mobility</option>
+                <option value="Cognitive">Cognitive</option>
+            </select><br>
+            <label for="interest">Field of Interest:</label>
+            <select id="interest" name="interest" required>
+                <option value="Field">--Select Field</option>
+                <option value="Science">Science</option>
+                <option value="Technology">Technology</option>
+                <option value="Art">Art</option>
+                <option value="Literature">Literature</option>
+                <option value="Sports">Sports</option>
+            </select><br>
+            <label for="specialNeeds">Anything else we should know (special needs):</label>
+            <input type="text" id="specialNeeds" name="specialNeeds"><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Declare constants to hold the values of the input fields
+            const name = document.getElementById('name').value;
+            const idNumber = document.getElementById('idNumber').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('Gender').value;
+            const address = document.getElementById('address').value;
+            const disability = document.getElementById('disability').value;
+            const interest = document.getElementById('interest').value;
+
+            // Check if any required fields are empty
+            if (!name || !idNumber || !age || !gender || !address || !disability || !interest) {
+                alert('Please answer all required questions before submitting.');
+            } else {
+                // If all required fields are filled, redirect to the login page
+                alert('Thank you for completing the questionnaire!');
+                window.location.href = 'login.html';  // Redirect to the login page
+            }
+        }
+    </script>
+</body>
+</html>
+

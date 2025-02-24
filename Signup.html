@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>En_ABle Sign-Up Form</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+     background-color:rgb(57, 144, 182);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .slogan {
+      color: black;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      color: black;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: rgb(57, 144, 182);
+      border: none;
+      border-radius: 4px;
+      color: black;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: green;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
+    .conditions {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      list-style: none;
+      padding: 0;
+      display: none;
+    }
+
+    .conditions li {
+      margin: 5px 0;
+    }
+
+    .conditions li.valid {
+      color: green;
+    }
+
+    .conditions li.invalid {
+      color: red;
+    }
+    .footer{
+      color:black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>En<span style="color: rgb(19, 20, 20);">_</span><span style="color: rgb(16, 16, 16);">Ab</span><span style="color: rgb(12, 12, 12);">Led</h1>
+    <p class="slogan">Connecting abilities, creating opportunities</p>
+    
+    <form id="signupForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username">
+
+      <label for="contact">Contact Number</label>
+      <input type="text" id="contactNumber" name="ContactNumber" placeholder="Enter your contact number">
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email">
+      <div id="emailError" class="error"></div>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password">
+      <ul class="conditions" id="passwordConditions">
+        <li id="lengthCondition" class="invalid">Must be at least 8 characters long.</li>
+        <li id="uppercaseCondition" class="invalid">Must include at least one uppercase letter.</li>
+        <li id="lowercaseCondition" class="invalid">Must include at least one lowercase letter.</li>
+        <li id="numberCondition" class="invalid">Must include at least one number.</li>
+        <li id="specialCondition" class="invalid">Must include at least one special character.</li>
+      </ul>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+      <div id="errorMessage" class="error"></div>
+
+      <button type="button" onclick="submitForm()">Sign Up</button>
+    </form>
+    <div class="footer">
+      <p>Account created successfully! Go back to <a href="login.html">login</a></p>
+    </div>
+  </div>
+
+  <script>
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // Password conditions
+    const lengthCondition = document.getElementById('lengthCondition');
+    const uppercaseCondition = document.getElementById('uppercaseCondition');
+    const lowercaseCondition = document.getElementById('lowercaseCondition');
+    const numberCondition = document.getElementById('numberCondition');
+    const specialCondition = document.getElementById('specialCondition');
+    const conditionsList = document.querySelector('.conditions');
+    
+    // Initially hide password conditions
+    conditionsList.style.display = 'none';
+    
+    passwordInput.addEventListener('focus', function () {
+      conditionsList.style.display = 'block';
+    });
+    
+    passwordInput.addEventListener('blur', function () {
+      if (!passwordInput.value) {
+        conditionsList.style.display = 'none';
+      }
+    });
+    
+    // Email regex
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    emailInput.addEventListener('input', function () {
+      const email = emailInput.value;
+      if (!emailRegex.test(email)) {
+        emailError.textContent = 'Invalid email address. Please enter a valid email address.';
+      } else {
+        emailError.textContent = '';
+      }
+    });
+    
+    passwordInput.addEventListener('input', function () {
+      const password = passwordInput.value;
+      
+      // Update each condition
+      lengthCondition.classList.toggle('valid', password.length >= 8);
+      lengthCondition.classList.toggle('invalid', password.length < 8);
+      
+      uppercaseCondition.classList.toggle('valid', /[A-Z]/.test(password));
+      uppercaseCondition.classList.toggle('invalid', !/[A-Z]/.test(password));
+      
+      lowercaseCondition.classList.toggle('valid', /[a-z]/.test(password));
+      lowercaseCondition.classList.toggle('invalid', !/[a-z]/.test(password));
+      
+      numberCondition.classList.toggle('valid', /\d/.test(password));
+      numberCondition.classList.toggle('invalid', !/\d/.test(password));
+      
+      specialCondition.classList.toggle('valid', /[!@#$%^&*(),.?":{}|<>]/.test(password));
+      specialCondition.classList.toggle('invalid', !/[!@#$%^&*(),.?":{}|<>]/.test(password));
+    });
+    
+    function submitForm() {
+      const username = usernameInput.value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+      
+      // Reset error messages
+      errorMessage.textContent = '';
+      emailError.textContent = '';
+      
+      // Validate all fields
+      if (!username || !email || !password || !confirmPassword) {
+        errorMessage.textContent = 'All fields are required!';
+      } else if (!emailRegex.test(email)) {
+        emailError.textContent = 'Invalid email address. Please enter a valid email address.';
+      } else if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        errorMessage.textContent = 'Password does not meet all the requirements.';
+      } else if (password !== confirmPassword) {
+        errorMessage.textContent = 'Passwords do not match!';
+      } else {
+        // If all validation passes
+        alert('Sign-up successful!');
+        window.location.href = 'Questionnaire.html';
+      }
+    }
+  </script>
+  
+</body>
+</html>

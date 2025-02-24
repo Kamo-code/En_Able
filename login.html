@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En_Able Login & Sign-Up</title>
+   
+    <style>
+        
+         body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color:rgb(57, 144, 182);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgb(253, 248, 248);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    .slogan {
+      color: hsl(30, 5%, 7%);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      color: #000;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+   button{
+      width: 100%;
+      padding: 10px;
+      background-color: rgb(58, 160, 201);
+      border: none;
+      border-radius: 4px;
+     /* color: lightseagreen;*/ 
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: green;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
+        .a {
+            color: #007bff;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    
+    </style>
+
+</head>
+
+<body>
+    <div class="container" id="loginContainer">
+        <h1>En<span style="color: black;">_</span><span c>Ab</span><span style="color: black;">Led</h1>
+        <p class="slogan">connecting abilities, creating opportunities</p>
+        <form action="login.php" method="post" id="loginForm">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" name="loginUsername" placeholder="Enter your username">
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password">
+
+            <div class="error" id="loginErrorMessage"></div>
+
+            <button type="submit" onclick="login(event)">Login</button>
+            <p class="link" onclick="forgotPassword()">Forgot Password?</p>
+            <!--<p>Don't have an account? <a href="Signup.html">Sign up here</a></p>-->
+
+        </form>
+    </div>
+
+  
+
+    <script>
+     
+
+        function showLogin() {
+            document.getElementById('signUpContainer').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'block';
+        }
+
+        function forgotPassword() {
+            alert('Redirecting to Forgot Password page...');
+        }
+
+        function login(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorMessage = document.getElementById('loginErrorMessage');
+
+            // Reset error message
+            errorMessage.textContent = '';
+
+            if (!username || !password) {
+                errorMessage.textContent = 'Both fields are required!';
+            } else {
+                alert('Login successful!');
+                document.getElementById('loginForm').reset();
+
+                // Redirect to landing page
+                window.location.href = 'index.html'; // Replace with your landing page URL
+            }
+        }
+
+        
+    </script>
+</body>
+
+</html>

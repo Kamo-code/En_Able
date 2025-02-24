@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      background: linear-gradient(  to bottom,rgba(0, 128, 0, 0.7),
+    rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.3));
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(40, 150, 223, 0.5);
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+      box-shadow: #0056b3;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid white;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .welcome-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80%;
+      z-index: 2;
+      position: relative;
+      padding-bottom: 0%;
+    }
+
+    .welcome-section h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      
+    }
+
+    .welcome-section p {
+      margin-bottom: 2rem;
+      font-size: 1.7rem;
+      color: #13547a;
+    }
+    .welcome-section #paragraph{
+      color: #000;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .button-group a {
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .button-group a.secondary {
+      background-color: transparent;
+      border: 1px solid white;
+    }
+
+    .button-group a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">En_Able</div>
+    <nav>
+      <a href="#">Home</a>
+      <!--<a href="#">Portfolio</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>-->
+    </nav>
+  </header>
+
+  <div class="welcome-section">
+    <h1>WELCOME TO <span style="color: #007bff;">En_Able</span></h1>
+    <p style="color: white;">Connecting Abiities, Creating Opportunities</p>
+
+    <p  style="font :10px;">En_Able is a digital platform that bridges opportunities for people with living disabilities. <br>
+    Did you know that millions of people with disabilities struggle to find inclusive job opportunities and <br>upskilling resources?
+    Imagine facing constant job rejection, limited access to resources, <br> and a workplace that isn’t built for you. 
+   <!-- But through Enable we here to change that! <br>
+    We connect job seekers and organizations to build an inclusive workforce.<br>
+    For job seekers, we offer a personalized experience through filtered job opportunities and skills that match your needs and <br> location, 
+    track applications as well as provide skill development for those looking to polish up on their skills <br>or develop new ones. <br>
+    For organizations we provide a platform for them to update their job description and<br> job posts to find their newest employee and guides for creating an accessible workplace.<br> 
+    Join us in creating a world where abilities matter more than disabilities.-->
+    </p>
+    <div class="button-group">
+      <a href="login.html" class="primary">LOGIN</a>
+      <a href="Signup.html" class="secondary">SIGN UP</a>
+    </div>
+  </div>
+</body>
+</html>
