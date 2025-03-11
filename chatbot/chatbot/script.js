@@ -1,7 +1,5 @@
 function chatbot(input) {
-  // Convert to lowercase and trim whitespace
   input = input.toLowerCase().trim();
-  // Remove punctuation for more robust matching
   const cleanInput = input.replace(/[^\w\s]/gi, "");
 
   let output = "";
