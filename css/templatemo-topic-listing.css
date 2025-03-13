@@ -886,6 +886,12 @@ blockquote {
     border-radius: var(--border-radius-medium);
     height: 150px;
 }
+#msg{
+     color: #000000;
+     margin-top: -40px;
+     display: block;
+
+}
 
 
 /*---------------------------------------

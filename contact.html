@@ -127,7 +127,7 @@ https://templatemo.com/tm-590-topic-listing
                     </div>
 
                     <div class="col-lg-6 col-12">
-                        <form action="#" method="post" class="custom-form contact-form" role="form">
+                        <form name="submit-to-google-sheet" method="post" class="custom-form contact-form" role="form">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-floating">
@@ -165,6 +165,7 @@ https://templatemo.com/tm-590-topic-listing
 
                             </div>
                         </form>
+                        <span id="msg"></span>
                     </div>
 
                     <div class="col-lg-5 col-12 mx-auto mt-5 mt-lg-0">
@@ -257,7 +258,27 @@ https://templatemo.com/tm-590-topic-listing
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="js/custom.js">
+
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwdLf78n4UZd39ajyI6uNRGW7wpZYLZhsAQ1_8Xq1Y7ZLVODS_lBI1XHn9bP30CpbJOkw/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message sent successfully"
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 
 </body>
 
