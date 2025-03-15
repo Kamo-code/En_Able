@@ -3,70 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire</title>
+    <title>En_Able Questionnaire</title>
 
     <!-- CSS Section Start -->
     <style>
+        :root {
+            --primary-color: #1565C0;
+            --secondary-color: #2E7D32;
+            --text-color: #212121;
+            --background-color: #F5F5F5;
+            --error-color: #D32F2F;
+            --focus-outline: 3px solid #FFC107;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: rgb(57, 144, 182);/* Update the background image if needed */
+            padding: 20px;
+            background-color: var(--background-color);
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-color);
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 350px;  /* Reduced form width */
-            padding: 60px;
-            text-align: center;
+            max-width: 600px;
+            padding: 30px;
+            margin: 20px 0;
         }
 
         h1 {
-            color: black;
-            font-size: 20px;  /* Reduced title size */
-            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
         }
 
         label {
-            font-size: 14px;  /* Smaller label text */
+            font-size: 18px;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .help-text {
+            font-size: 14px;
+            color: #555;
             margin-bottom: 5px;
             display: block;
-            text-align: left;
         }
 
         input, select {
             width: 100%;
-            padding: 8px;  /* Smaller input padding */
-            margin-bottom: 10px;  /* Reduced spacing between inputs */
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;  /* Smaller input font */
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: var(--focus-outline);
+            border-color: var(--primary-color);
         }
 
         button {
             width: 100%;
-            padding: 8px;  /* Reduced button padding */
-            background-color: rgb(57, 144, 182);
+            padding: 15px;
+            background-color: var(--primary-color);
             border: none;
-            border-radius: 4px;
-            color: black;
-            font-size: 14px;  /* Smaller button text */
+            border-radius: 6px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: green;
+            background-color: var(--secondary-color);
         }
 
-        .question {
-            font-size: 14px;  /* Reduced question text size */
+        button:focus {
+            outline: var(--focus-outline);
+        }
+
+        .required:after {
+            content: " *";
+            color: var(--error-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* High contrast mode toggle */
+        .accessibility-tools {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .contrast-toggle {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .font-size-controls {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .font-size-controls button {
+            width: auto;
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+
+        /* High contrast mode styles */
+        body.high-contrast {
+            background-color: black;
+            color: white;
+        }
+
+        body.high-contrast .container {
+            background-color: black;
+            border: 2px solid white;
+        }
+
+        body.high-contrast h1,
+        body.high-contrast label {
+            color: yellow;
+        }
+
+        body.high-contrast input,
+        body.high-contrast select {
+            background-color: black;
+            color: white;
+            border: 2px solid yellow;
+        }
+
+        body.high-contrast button {
+            background-color: yellow;
+            color: black;
+            border: 2px solid white;
+        }
+
+        body.high-contrast .help-text {
+            color: #aaa;
+        }
+
+        /* Large text mode */
+        body.large-text label {
+            font-size: 22px;
+        }
+
+        body.large-text input, 
+        body.large-text select,
+        body.large-text button {
+            font-size: 20px;
+            padding: 15px;
+        }
+
+        body.large-text .help-text {
+            font-size: 18px;
         }
     </style>
     <!-- CSS Section End -->
@@ -74,83 +195,229 @@
 
 <body>
     <div class="container">
-        <h1>Questionnaire Form</h1>
-        <form id="questionnaireForm" onsubmit="submitForm(event)">
+        <div class="accessibility-tools">
+            <div class="font-size-controls">
+                <!--<button id="decreaseFont" aria-label="Decrease font size">A-</button>
+                <button id="increaseFont" aria-label="Increase font size">A+</button>-->
+            </div>
+            <button id="contrastToggle" class="contrast-toggle" aria-label="Toggle high contrast mode">High Contrast</button>
+        </div>
 
-            <label for="name">Name and Surname:</label>
-            <input type="text" id="name" name="name" required><br>
+        <h1>En_ABle Questionnaire</h1>
+        <p id="formInstructions">Please fill out all required fields marked with an asterisk (*). Use the tab key to navigate between fields.</p>
+        
+        <form id="questionnaireForm" onsubmit="submitForm(event)" novalidate>
+            <div class="form-group">
+                <label for="name" class="required">Name and Surname</label>
+                <span class="help-text">Enter your full name as it appears on your ID document</span>
+                <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+                <div id="nameError" class="error-message"></div>
+            </div>
 
-            <label for="idNumber">ID Number:</label>
-            <input type="text" id="idNumber" name="idNumber" required  pattern="[0-9]{13}" maxlength="13"><br>
+            <div class="form-group">
+                <label for="idNumber" class="required">ID Number</label>
+                <span class="help-text">Enter your 13-digit ID number without spaces</span>
+                <input type="text" id="idNumber" name="idNumber" required aria-required="true" pattern="[0-9]{13}" maxlength="13">
+                <div id="idNumberError" class="error-message"></div>
+            </div>
 
-            <label for="age">Age:</label>
-            <input type="text" id="age" name="age" required><br>
+            <div class="form-group">
+                <label for="age" class="required">Age</label>
+                <input type="number" id="age" name="age" required aria-required="true" min="1" max="120">
+                <div id="ageError" class="error-message"></div>
+            </div>
 
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required><br>
+            <div class="form-group">
+                <label for="address" class="required">Address</label>
+                <span class="help-text">Enter your current residential address</span>
+                <input type="text" id="address" name="address" required aria-required="true" autocomplete="street-address">
+                <div id="addressError" class="error-message"></div>
+            </div>
 
-            <label for="Gender">Gender:</label>
-            <select id="Gender" name="Gender" required>
-                <option value="Gender">--Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select><br>
-            <label for="race">Race</label>
-            <select id="race" name="race">
-                <option value="None">None</option>
-                <option value="African/Black">African/Black</option>
-                <option value="white">white</option>
-                <option value="Coloured">Coloured</option>
-                <option value="indian">Indian</option>
-            </select><br>
-            <label for="disability">Type of Disability:</label>
-            <select id="disability" name="disability" required>
-                <option value="None">None</option>
-                <option value="Visual">Visual</option>
-                <option value="Hearing">Hearing</option>
-                <option value="Mobility">Mobility</option>
-                <option value="Cognitive">Cognitive</option>
-            </select><br>
-            <label for="interest">Field of Interest:</label>
-            <select id="interest" name="interest" required>
-                <option value="Field">--Select Field</option>
-                <option value="Science">Science</option>
-                <option value="Technology">Technology</option>
-                <option value="Art">Art</option>
-                <option value="Literature">Literature</option>
-                <option value="Sports">Sports</option>
-            </select><br>
-            <label for="specialNeeds">Anything else we should know (special needs):</label>
-            <input type="text" id="specialNeeds" name="specialNeeds"><br>
+            <div class="form-group">
+                <label for="Gender" class="required">Gender</label>
+                <select id="Gender" name="Gender" required aria-required="true">
+                    <option value="">--Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                    <option value="PreferNotToSay">Prefer not to say</option>
+                </select>
+                <div id="genderError" class="error-message"></div>
+            </div>
 
-            <button type="submit">Submit</button>
+            <div class="form-group">
+                <label for="race">Race</label>
+                <span class="help-text">This information is used for demographic purposes only</span>
+                <select id="race" name="race">
+                    <option value="None">Prefer not to say</option>
+                    <option value="African/Black">African/Black</option>
+                    <option value="white">White</option>
+                    <option value="Coloured">Coloured</option>
+                    <option value="indian">Indian</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="disability" class="required">Type of Disability</label>
+                <span class="help-text">Select the option that best describes your situation</span>
+                <select id="disability" name="disability" required aria-required="true">
+                    <option value="None">None</option>
+                    <option value="Visual">Visual impairment</option>
+                    <option value="Hearing">Hearing impairment</option>
+                    <option value="Mobility">Mobility impairment</option>
+                    <option value="Cognitive">Cognitive impairment</option>
+                    <option value="Multiple">Multiple disabilities</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="disabilityError" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="interest" class="required">Field of Interest</label>
+                <select id="interest" name="interest" required aria-required="true">
+                    <option value="">--Select Field</option>
+                    <option value="Science">Science</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Art">Art</option>
+                    <option value="Literature">Literature</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Business">Business</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div id="interestError" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="specialNeeds">Special Accommodations Needed</label>
+                <span class="help-text">Please describe any specific accommodations that would help you</span>
+                <input type="text" id="specialNeeds" name="specialNeeds" aria-description="Describe any special accommodations you might need">
+            </div>
+
+            <button type="submit" aria-label="Submit form">Submit</button>
         </form>
     </div>
 
     <script>
+        // Accessibility Features
+        const contrastToggle = document.getElementById('contrastToggle');
+        const increaseFont = document.getElementById('increaseFont');
+        const decreaseFont = document.getElementById('decreaseFont');
+        
+        contrastToggle.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+            const isHighContrast = document.body.classList.contains('high-contrast');
+            contrastToggle.textContent = isHighContrast ? 'Standard Mode' : 'High Contrast';
+            localStorage.setItem('highContrast', isHighContrast);
+        });
+        
+        increaseFont.addEventListener('click', () => {
+            document.body.classList.add('large-text');
+            localStorage.setItem('largeText', true);
+        });
+        
+        decreaseFont.addEventListener('click', () => {
+            document.body.classList.remove('large-text');
+            localStorage.setItem('largeText', false);
+        });
+        
+        // Load user preferences
+        window.addEventListener('DOMContentLoaded', () => {
+            const highContrast = localStorage.getItem('highContrast') === 'true';
+            const largeText = localStorage.getItem('largeText') === 'true';
+            
+            if (highContrast) {
+                document.body.classList.add('high-contrast');
+                contrastToggle.textContent = 'Standard Mode';
+            }
+            
+            if (largeText) {
+                document.body.classList.add('large-text');
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = document.querySelectorAll('[required]');
+            
+            // Reset all error messages
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    const fieldName = field.id;
+                    const errorElement = document.getElementById(`${fieldName}Error`) || document.createElement('div');
+                    errorElement.textContent = `This field is required`;
+                    errorElement.className = 'error-message';
+                    if (!document.getElementById(`${fieldName}Error`)) {
+                        field.parentNode.appendChild(errorElement);
+                    }
+                    isValid = false;
+                }
+            });
+            
+            // Specific ID Number validation
+            const idNumber = document.getElementById('idNumber');
+            if (idNumber.value && !idNumber.value.match(/^\d{13}$/)) {
+                document.getElementById('idNumberError').textContent = 'ID Number must be exactly 13 digits';
+                isValid = false;
+            }
+            
+            // Age validation
+            const age = document.getElementById('age');
+            if (age.value && (isNaN(age.value) || age.value < 1 || age.value > 120)) {
+                document.getElementById('ageError').textContent = 'Please enter a valid age between 1 and 120';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
         function submitForm(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-
-            // Declare constants to hold the values of the input fields
-            const name = document.getElementById('name').value;
-            const idNumber = document.getElementById('idNumber').value;
-            const age = document.getElementById('age').value;
-            const gender = document.getElementById('Gender').value;
-            const address = document.getElementById('address').value;
-            const disability = document.getElementById('disability').value;
-            const interest = document.getElementById('interest').value;
-
-            // Check if any required fields are empty
-            if (!name || !idNumber || !age || !gender || !address || !disability || !interest) {
-                alert('Please answer all required questions before submitting.');
-            } else {
-                // If all required fields are filled, redirect to the login page
-                alert('Thank you for completing the questionnaire!');
-                window.location.href = 'login.html';  // Redirect to the login page
+            event.preventDefault();
+            
+            if (validateForm()) {
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    idNumber: document.getElementById('idNumber').value,
+                    age: document.getElementById('age').value,
+                    address: document.getElementById('address').value,
+                    gender: document.getElementById('Gender').value,
+                    race: document.getElementById('race').value,
+                    disability: document.getElementById('disability').value,
+                    interest: document.getElementById('interest').value,
+                    specialNeeds: document.getElementById('specialNeeds').value
+                };
+                
+                // Show success message with screen reader announcement
+                const successMessage = document.createElement('div');
+                successMessage.setAttribute('role', 'alert');
+                successMessage.textContent = 'Form submitted successfully! Redirecting to login page...';
+                successMessage.style.backgroundColor = '#dff0d8';
+                successMessage.style.color = '#3c763d';
+                successMessage.style.padding = '15px';
+                successMessage.style.borderRadius = '4px';
+                successMessage.style.marginTop = '20px';
+                
+                const form = document.getElementById('questionnaireForm');
+                form.parentNode.insertBefore(successMessage, form.nextSibling);
+                
+                // Redirect after a delay to allow screen readers to announce the message
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 3000);
             }
         }
-    </script>
-</body>
-</html>
 
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                const form = document.getElementById('questionnaireForm');
+                const inputs = Array.from(form.elements);
+                const currentIndex = inputs.indexOf(document.active
+            }
