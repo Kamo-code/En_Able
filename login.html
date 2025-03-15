@@ -7,112 +7,190 @@
     <title>En_Able Login & Sign-Up</title>
    
     <style>
+        :root {
+            --primary-color: #2596be;
+            --primary-dark: #1a7a9e;
+            --primary-light: #a8e0f7;
+            --secondary-color: #34c759;
+            --text-color: #333333;
+            --light-text: #666666;
+            --background: #f5f9fc;
+            --white: #ffffff;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --input-border: #e0e0e0;
+        }
         
-         body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color:rgb(57, 144, 182);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: var(--text-color);
+        }
 
-    .container {
-      background-color: rgb(253, 248, 248);
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      padding: 20px;
-      text-align: center;
-    }
+        .container {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
-    h1 {
-      
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: black;
-    }
+        .logo {
+            margin-bottom: 20px;
+        }
 
-    .slogan {
-      color: hsl(30, 5%, 7%);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      text-align: left;
-      color: #000;
-    }
+        .logo span.highlight {
+            color: var(--primary-color);
+        }
 
-    input {
-      width: calc(100% - 20px);
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+        .slogan {
+            color: var(--light-text);
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
 
-   button{
-      width: 100%;
-      padding: 10px;
-      background-color: rgb(58, 160, 201);
-      border: none;
-      border-radius: 4px;
-     /* color: lightseagreen;*/ 
-      font-size: 16px;
-      cursor: pointer;
-    }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
-    button:hover {
-      background-color: green;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 15px;
+        }
 
-    .error {
-      color: red;
-      font-size: 12px;
-    }
+        .input-container {
+            position: relative;
+        }
 
-        .a {
-            color: #007bff;
-            font-size: 14px;
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            text-align: left;
+            margin-bottom: 15px;
+            min-height: 20px;
+        }
+
+        .link {
+            color: var(--primary-color);
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .link:hover {
+            color: var(--primary-dark);
             text-decoration: underline;
         }
-    
+        
+        .signup-prompt {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--input-border);
+            font-size: 15px;
+            color: var(--light-text);
+        }
     </style>
-
 </head>
 
 <body>
     <div class="container" id="loginContainer">
-        <h1>En<span style="color: black;">_</span><span c>Ab</span><span style="color: black;">Led</h1>
-        <p class="slogan">connecting abilities, creating opportunities</p>
+        <div class="logo">
+            <h1>En<span class="highlight">_Able</span></h1>
+            <p class="slogan">Connecting abilities, creating opportunities</p>
+        </div>
+        
         <form action="login.php" method="post" id="loginForm">
-            <label for="loginUsername">Username</label>
-            <input type="text" id="loginUsername" name="loginUsername" placeholder="Enter your username">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <div class="input-container">
+                    <input type="text" id="loginUsername" name="loginUsername" placeholder="Enter your username">
+                </div>
+            </div>
 
-            <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password">
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="input-container">
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password">
+                </div>
+            </div>
 
             <div class="error" id="loginErrorMessage"></div>
 
-            <button type="submit" onclick="login(event)">Login</button>
-            <p class="link" onclick="forgotPassword()">Forgot Password?</p>
-            <!--<p>Don't have an account? <a href="Signup.html">Sign up here</a></p>-->
-
+            <button type="submit" onclick="login(event)">Log In</button>
+            <a class="link" onclick="forgotPassword()">Forgot Password?</a>
+            
+            <div class="signup-prompt">
+                Don't have an account? <a class="link" href="signup.html">Sign up here</a>
+            </div>
         </form>
     </div>
 
-  
-
     <script>
-     
-
         function showLogin() {
             document.getElementById('signUpContainer').style.display = 'none';
             document.getElementById('loginContainer').style.display = 'block';
@@ -133,7 +211,7 @@
             errorMessage.textContent = '';
 
             if (!username || !password) {
-                errorMessage.textContent = 'Both fields are required!';
+                errorMessage.textContent = 'Please enter both username and password.';
             } else {
                 alert('Login successful!');
                 document.getElementById('loginForm').reset();
@@ -142,9 +220,6 @@
                 window.location.href = 'index.html'; // Replace with your landing page URL
             }
         }
-
-        
     </script>
 </body>
-
 </html>
