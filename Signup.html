@@ -3,225 +3,468 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>En_ABle Sign-Up Form</title>
+  <title>En_Able Sign-Up Form</title>
   
   <style>
+    :root {
+      --primary-color: #1565C0;
+      --secondary-color: #2E7D32;
+      --text-color: #212121;
+      --background-color: #F5F5F5;
+      --error-color: #D32F2F;
+      --success-color: #388E3C;
+      --focus-outline: 3px solid #FFC107;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-     background-color:rgb(57, 144, 182);
+      padding: 20px;
+      background-color: var(--background-color);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      line-height: 1.6;
     }
 
     .container {
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       width: 100%;
-      max-width: 400px;
-      padding: 20px;
-      text-align: center;
+      max-width: 500px;
+      padding: 30px;
+      margin: 20px 0;
     }
 
-    h1 {
-      
-      font-size: 24px;
+    .logo {
+      text-align: center;
       margin-bottom: 10px;
     }
 
+    h1 {
+      color: var(--primary-color);
+      font-size: 28px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
     .slogan {
-      color: black;
-      font-size: 14px;
+      color: var(--text-color);
+      font-size: 16px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-group {
       margin-bottom: 20px;
     }
 
     label {
       display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .help-text {
+      font-size: 14px;
+      color: #555;
       margin-bottom: 5px;
-      text-align: left;
-      color: black;
+      display: block;
     }
 
     input {
-      width: calc(100% - 20px);
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: var(--focus-outline);
+      border-color: var(--primary-color);
     }
 
     button {
       width: 100%;
-      padding: 10px;
-      background-color: rgb(57, 144, 182);
+      padding: 15px;
+      background-color: var(--primary-color);
       border: none;
-      border-radius: 4px;
-      color: black;
-      font-size: 16px;
+      border-radius: 6px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
-      background-color: green;
+      background-color: var(--secondary-color);
+    }
+
+    button:focus {
+      outline: var(--focus-outline);
     }
 
     .error {
-      color: red;
-      font-size: 12px;
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: 5px;
+      animation: fadeIn 0.3s;
     }
 
     .conditions {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      list-style: none;
-      padding: 0;
-      display: none;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      padding: 10px 15px;
+      margin: 10px 0;
+      transition: all 0.3s ease;
     }
 
     .conditions li {
-      margin: 5px 0;
+      margin: 8px 0;
+      font-size: 14px;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
     }
 
-    .conditions li.valid {
-      color: green;
+    .conditions li:before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 50%;
+      background-color: #eee;
     }
 
-    .conditions li.invalid {
-      color: red;
+    .conditions li.valid:before {
+      background-color: var(--success-color);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+      background-size: 14px;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-    .footer{
-      color:black;
+
+    .conditions li.invalid:before {
+      background-color: #eee;
+    }
+
+    .footer {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Accessibility features */
+    .accessibility-tools {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contrast-toggle {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .font-size-controls {
+      display: flex;
+      align-items: center;
+    }
+
+    .font-size-controls button {
+      width: auto;
+      padding: 5px 10px;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+
+    /* High contrast mode */
+    body.high-contrast {
+      background-color: black;
+      color: white;
+    }
+
+    body.high-contrast .container {
+      background-color: black;
+      border: 2px solid white;
+    }
+
+    body.high-contrast h1,
+    body.high-contrast label {
+      color: yellow;
+    }
+
+    body.high-contrast input {
+      background-color: black;
+      color: white;
+      border: 2px solid yellow;
+    }
+
+    body.high-contrast button {
+      background-color: yellow;
+      color: black;
+      border: 2px solid white;
+    }
+
+    body.high-contrast .conditions {
+      background-color: #333;
+      border: 1px solid white;
+    }
+
+    body.high-contrast .help-text {
+      color: #aaa;
+    }
+
+    body.high-contrast .footer a {
+      color: yellow;
+    }
+
+    /* Large text mode */
+    body.large-text label {
+      font-size: 22px;
+    }
+
+    body.large-text input, 
+    body.large-text button {
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    body.large-text .help-text,
+    body.large-text .error,
+    body.large-text .conditions li {
+      font-size: 18px;
+    }
+
+    body.large-text .slogan {
+      font-size: 20px;
+    }
+
+    /* Voice input button */
+    .voice-input {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      font-size: 24px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    /* Screen reader only text */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>En<span style="color: rgb(19, 20, 20);">_</span><span style="color: rgb(16, 16, 16);">Ab</span><span style="color: rgb(12, 12, 12);">Led</h1>
+    <div class="accessibility-tools">
+      <div class="font-size-controls">
+        <!--<button id="decreaseFont" aria-label="Decrease font size">A-</button>
+        <button id="increaseFont" aria-label="Increase font size">A+</button>-->
+      </div>
+      <button id="contrastToggle" class="contrast-toggle" aria-label="Toggle high contrast mode">High Contrast</button>
+    </div>
+
+    <div class="logo" aria-hidden="true">
+      <!-- Logo could be placed here -->
+    </div>
+    
+    <h1>En<span style="color: var(--text-color);">_</span><span style="color: var(--text-color);">Ab</span><span style="color: var(--text-color);">le</span></h1>
     <p class="slogan">Connecting abilities, creating opportunities</p>
     
-    <form id="signupForm">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" placeholder="Enter your username">
-
-      <label for="contact">Contact Number</label>
-      <input type="text" id="contactNumber" name="ContactNumber" placeholder="Enter your contact number">
+    <div role="status" id="formStatus" aria-live="polite" class="sr-only"></div>
+    
+    <form id="signupForm" aria-labelledby="formHeading">
+      <h2 id="formHeading" class="sr-only">Sign Up Form</h2>
       
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email">
-      <div id="emailError" class="error"></div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <span class="help-text">Choose a username you'll use to log in</span>
+        <div class="input-wrapper">
+          <input type="text" id="username" name="username" placeholder="Enter your username" aria-required="true">
+        </div>
+        <div id="usernameError" class="error" role="alert"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <span class="help-text">Enter your phone number with country code</span>
+        <div class="input-wrapper">
+          <input 
+            type="tel" 
+            id="contactNumber" 
+            name="contactNumber" 
+            placeholder="e.g. +27 XX XXX XXXX" 
+            aria-required="true"
+            pattern="[0-9+\s]+"
+          >
+        </div>
+        <div id="contactError" class="error" role="alert"></div>
+      </div>
       
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Enter your password">
-      <ul class="conditions" id="passwordConditions">
-        <li id="lengthCondition" class="invalid">Must be at least 8 characters long.</li>
-        <li id="uppercaseCondition" class="invalid">Must include at least one uppercase letter.</li>
-        <li id="lowercaseCondition" class="invalid">Must include at least one lowercase letter.</li>
-        <li id="numberCondition" class="invalid">Must include at least one number.</li>
-        <li id="specialCondition" class="invalid">Must include at least one special character.</li>
-      </ul>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <span class="help-text">We'll send a verification link to this email</span>
+        <div class="input-wrapper">
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Enter your email" 
+            aria-required="true"
+            autocomplete="email"
+          >
+        </div>
+        <div id="emailError" class="error" role="alert"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <span class="help-text">Create a strong password for your account</span>
+        <div class="input-wrapper">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Create a password" 
+            aria-required="true"
+            aria-describedby="passwordConditions"
+          >
+        </div>
+        <ul class="conditions" id="passwordConditions">
+          <li id="lengthCondition" class="invalid">Must be at least 8 characters long</li>
+          <li id="uppercaseCondition" class="invalid">Must include at least one uppercase letter</li>
+          <li id="lowercaseCondition" class="invalid">Must include at least one lowercase letter</li>
+          <li id="numberCondition" class="invalid">Must include at least one number</li>
+          <li id="specialCondition" class="invalid">Must include at least one special character</li>
+        </ul>
+      </div>
 
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
-      <div id="errorMessage" class="error"></div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <span class="help-text">Enter your password again to confirm</span>
+        <div class="input-wrapper">
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            placeholder="Confirm your password" 
+            aria-required="true"
+          >
+        </div>
+        <div id="passwordMatchError" class="error" role="alert"></div>
+      </div>
 
-      <button type="button" onclick="submitForm()">Sign Up</button>
+      <button type="button" onclick="submitForm()" aria-label="Complete sign up">Sign Up</button>
+      <div id="errorSummary" class="error" role="alert" aria-live="assertive"></div>
     </form>
+    
     <div class="footer">
-      <p>Account created successfully! Go back to <a href="login.html">login</a></p>
+      <p>Already have an account? <a href="login.html">Log in</a></p>
     </div>
   </div>
 
   <script>
+    // Accessibility Features
+    const contrastToggle = document.getElementById('contrastToggle');
+    const increaseFont = document.getElementById('increaseFont');
+    const decreaseFont = document.getElementById('decreaseFont');
+    
+    contrastToggle.addEventListener('click', () => {
+      document.body.classList.toggle('high-contrast');
+      const isHighContrast = document.body.classList.contains('high-contrast');
+      contrastToggle.textContent = isHighContrast ? 'Standard Mode' : 'High Contrast';
+      localStorage.setItem('highContrast', isHighContrast);
+      
+      // Announce the change to screen readers
+      document.getElementById('formStatus').textContent = isHighContrast ? 
+        'High contrast mode enabled' : 'Standard mode enabled';
+    });
+    
+    increaseFont.addEventListener('click', () => {
+      document.body.classList.add('large-text');
+      localStorage.setItem('largeText', true);
+      document.getElementById('formStatus').textContent = 'Font size increased';
+    });
+    
+    decreaseFont.addEventListener('click', () => {
+      document.body.classList.remove('large-text');
+      localStorage.setItem('largeText', false);
+      document.getElementById('formStatus').textContent = 'Font size reset to normal';
+    });
+    
+    // Load user preferences
+    window.addEventListener('DOMContentLoaded', () => {
+      const highContrast = localStorage.getItem('highContrast') === 'true';
+      const largeText = localStorage.getItem('largeText') === 'true';
+      
+      if (highContrast) {
+        document.body.classList.add('high-contrast');
+        contrastToggle.textContent = 'Standard Mode';
+      }
+      
+      if (largeText) {
+        document.body.classList.add('large-text');
+      }
+    });
+
+    // Form validation elements
     const usernameInput = document.getElementById('username');
+    const contactInput = document.getElementById('contactNumber');
     const emailInput = document.getElementById('email');
     const emailError = document.getElementById('emailError');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
-    const errorMessage = document.getElementById('errorMessage');
+    const passwordMatchError = document.getElementById('passwordMatchError');
+    const errorSummary = document.getElementById('errorSummary');
     
     // Password conditions
     const lengthCondition = document.getElementById('lengthCondition');
     const uppercaseCondition = document.getElementById('uppercaseCondition');
     const lowercaseCondition = document.getElementById('lowercaseCondition');
-    const numberCondition = document.getElementById('numberCondition');
-    const specialCondition = document.getElementById('specialCondition');
-    const conditionsList = document.querySelector('.conditions');
-    
-    // Initially hide password conditions
-    conditionsList.style.display = 'none';
-    
-    passwordInput.addEventListener('focus', function () {
-      conditionsList.style.display = 'block';
-    });
-    
-    passwordInput.addEventListener('blur', function () {
-      if (!passwordInput.value) {
-        conditionsList.style.display = 'none';
-      }
-    });
-    
-    // Email regex
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-    emailInput.addEventListener('input', function () {
-      const email = emailInput.value;
-      if (!emailRegex.test(email)) {
-        emailError.textContent = 'Invalid email address. Please enter a valid email address.';
-      } else {
-        emailError.textContent = '';
-      }
-    });
-    
-    passwordInput.addEventListener('input', function () {
-      const password = passwordInput.value;
-      
-      // Update each condition
-      lengthCondition.classList.toggle('valid', password.length >= 8);
-      lengthCondition.classList.toggle('invalid', password.length < 8);
-      
-      uppercaseCondition.classList.toggle('valid', /[A-Z]/.test(password));
-      uppercaseCondition.classList.toggle('invalid', !/[A-Z]/.test(password));
-      
-      lowercaseCondition.classList.toggle('valid', /[a-z]/.test(password));
-      lowercaseCondition.classList.toggle('invalid', !/[a-z]/.test(password));
-      
-      numberCondition.classList.toggle('valid', /\d/.test(password));
-      numberCondition.classList.toggle('invalid', !/\d/.test(password));
-      
-      specialCondition.classList.toggle('valid', /[!@#$%^&*(),.?":{}|<>]/.test(password));
-      specialCondition.classList.toggle('invalid', !/[!@#$%^&*(),.?":{}|<>]/.test(password));
-    });
-    
-    function submitForm() {
-      const username = usernameInput.value;
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
-      
-      // Reset error messages
-      errorMessage.textContent = '';
-      emailError.textContent = '';
-      
-      // Validate all fields
-      if (!username || !email || !password || !confirmPassword) {
-        errorMessage.textContent = 'All fields are required!';
-      } else if (!emailRegex.test(email)) {
-        emailError.textContent = 'Invalid email address. Please enter a valid email address.';
-      } else if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-        errorMessage.textContent = 'Password does not meet all the requirements.';
-      } else if (password !== confirmPassword) {
-        errorMessage.textContent = 'Passwords do not match!';
-      } else {
-        // If all validation passes
-        alert('Sign-up successful!');
-        window.location.href = 'Questionnaire.html';
-      }
-    }
-  </script>
-  
-</body>
-</html>
